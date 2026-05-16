@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti, Mi Amor 💗</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --rosa-principal: #ffb7b2; 
+            --rosa-oscuro: #d48383;    
+            --texto-base: #4a403a;
+            --oro-rosa: #e5b3b0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-image: url('https://i.pinimg.com/736x/9f/42/e0/9f42e0b8b03b8ea5c6da28363416ced0.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-base);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- INTERFAZ PANTALLA DE BLOQUEO --- */
+        #lock-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://i.pinimg.com/736x/9f/42/e0/9f42e0b8b03b8ea5c6da28363416ced0.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #lock-screen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(253, 250, 246, 0.2);
+            z-index: -1;
+        }
+
+        .lock-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(5px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(224, 146, 146, 0.12);
+            border: 1px solid rgba(255, 183, 178, 0.3);
+            max-width: 380px;
+            width: 90%;
+        }
+
+        .lock-card i {
+            font-size: 38px;
+            color: var(--rosa-principal);
+            margin-bottom: 20px;
+        }
+
+        .lock-card h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--texto-base);
+        }
+
+        .lock-card p {
+            font-size: 13px;
+            color: #7d7266;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .lock-card input {
+            width: 130px;
+            padding: 10px;
+            font-size: 26px;
+            text-align: center;
+            border: none;
+            border-bottom: 2px solid var(--rosa-principal);
+            background: transparent;
+            outline: none;
+            color: var(--texto-base);
+            margin-bottom: 25px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 4px;
+        }
+
+        .lock-card button {
+            display: block;
+            margin: 0 auto;
+            padding: 12px 35px;
+            background: var(--rosa-principal);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(255, 183, 178, 0.3);
+            transition: all 0.3s;
+        }
+
+        .lock-card button:hover {
+            background: var(--rosa-oscuro);
+            transform: translateY(-1px);
+        }
+
+        #error-msg {
+            color: #de7a7a;
+            font-size: 13px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* --- LIENZO DE TEXTO PRINCIPAL --- */
+        #main-content {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.97);
+            transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .carta-container {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 45px;
+            box-shadow: 0 15px 45px rgba(180, 150, 150, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            outline: 4px double var(--oro-rosa);
+            outline-offset: -12px;
+            position: relative;
+        }
+
+        /* --- ESTILOS DE CORTE EN CÍRCULO --- */
+        .bloque-ilustrado {
+            overflow: hidden;
+            margin-bottom: 20px;
+            clear: both;
+        }
+
+        .img-decorativa {
+            width: 175px;
+            height: 175px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            outline: 2px solid var(--oro-rosa);
+            outline-offset: 3px;
+            box-shadow: 0 6px 15px rgba(212, 131, 131, 0.15);
+            background-color: white;
+            transition: transform 0.4s ease;
+        }
+
+        .img-decorativa:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .img-derecha {
+            float: right;
+            margin: 10px 0 15px 25px;
+        }
+
+        .img-izquierda {
+            float: left;
+            margin: 10px 25px 15px 0;
+        }
+
+        /* Ajuste especial para resaltar el beso */
+        .img-grande {
+            width: 200px;
+            height: 200px;
+        }
+
+        .fecha-cabecera {
+            text-align: right;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--rosa-oscuro);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .seccion-titulo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            color: var(--rosa-oscuro);
+            text-align: center;
+            font-style: italic;
+            margin: 30px 0 15px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            clear: both;
+        }
+
+        .texto-romantico {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 21px;
+            color: var(--texto-base);
+            text-align: justify;
+            font-style: italic;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-indent: 20px;
+        }
+
+        .divisor-decorativo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 35px 0;
+            color: var(--oro-rosa);
+            clear: both;
+        }
+
+        .divisor-decorativo::before, .divisor-decorativo::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to var(--direction, right), rgba(229,179,176,0), rgba(229,179,176,0.7));
+        }
+        .divisor-decorativo::after { --direction: left; }
+
+        .divisor-decorativo i {
+            margin: 0 15px;
+            font-size: 14px;
+        }
+
+        .firma-final {
+            text-align: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--rosa-oscuro);
+            margin-top: 40px;
+            line-height: 1.6;
+            clear: both;
+        }
+
+        /* --- PÉTALOS NATURALES --- */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            top: -30px;
+            background: linear-gradient(135deg, #ffc4c0 0%, #ff9e99 100%);
+            border-radius: 1% 99% 1% 99% / 1% 99% 1% 99%;
+            box-shadow: 1px 1px 3px rgba(224, 146, 146, 0.15);
+            opacity: 0.9;
+            transform-origin: center;
+            animation: caerNatural linear forwards, balanceoSuave ease-in-out infinite alternate;
+        }
+
+        @keyframes caerNatural {
+            0% { top: -30px; opacity: 0; }
+            10% { opacity: 0.9; }
+            100% {
+                top: 105vh;
+                left: calc(var(--start-x) + var(--drift-x));
+                opacity: 0.1;
+            }
+        }
+
+        @keyframes balanceoSuave {
+            0% { transform: rotate(0deg) translateX(-10px); }
+            100% { transform: rotate(var(--rotacion-max)) translateX(10px); }
+        }
+
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid rgba(255, 183, 178, 0.3);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: var(--rosa-oscuro);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            z-index: 1010;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        #music-control:hover { opacity: 1; }
+
+        /* --- RESPONSIVE PARA MÓVILES --- */
+        @media (max-width: 600px) {
+            .carta-container {
+                padding: 35px 20px;
+            }
+            .img-derecha, .img-izquierda {
+                float: none;
+                display: block;
+                margin: 20px auto;
+            }
+            .texto-romantico {
+                text-align: left;
+                font-size: 19px;
+                text-indent: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lock-screen">
+        <div class="lock-card">
+            <i class="fa-solid fa-heart"></i>
+            <h2>Acceso Privado</h2>
+            <p>Introduce nuestra fecha especial para continuar</p>
+            <input type="password" id="passInput" placeholder="••••" maxlength="4" autocomplete="off">
+            <button onclick="checkAccess()">Ingresar</button>
+            <p id="error-msg">Fecha incorrecta... Inténtalo de nuevo. 💕</p>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="carta-container">
+            <div class="fecha-cabecera">Nuestros 7 Meses ✨</div>
+            
+            <div class="bloque-ilustrado">
+                <img src="Painter of the night ~ Seungho x Nakium.jfif" alt="Chibi Pensando en Gato" class="img-decorativa img-derecha">
+                <div class="texto-romantico">
+                    Mi amor, hoy se cumplen 7 meses desde que todo comenzó y aún me parece que todo haya sido hace tan poco. Contigo a mi lado el tiempo se acelera, como si no quisiera que disfrutemos el estar juntos, pero Dios nos bendice con otro mes, cada día más cerca de nuestra meta como pareja. Quiero decirte que no sabes lo tanto que has cambiado mi vida desde que llegaste; tu forma de ver al mundo tan única, la amo, y desde que te conocí no he dejado de cambiar.
+                </div>
+            </div>
+
+            <div class="bloque-ilustrado">
+                <div class="texto-romantico">
+                    Tu llegada ya estaba antes avisada in mis sueños. Aún recuerdo esos lindos momentos que pasé, y ahora tengo a esa personita conmigo. Tu voz me cautiva siempre que tengo un mal día o estoy cansado; solo deseo escuchar tu dulce voz. No te lo he dicho, bebé, pero a veces anhelo solo poder abrazarte al dormir, poder hablar cara a cara contigo, cielo. En esos momentos escucho tus audios y siento una calma que no puedo explicar, bebé.
+                </div>
+            </div>
+
+            <div class="divisor-decorativo"><i class="fa-solid fa-star"></i></div>
+
+            <div class="seccion-titulo">"Tu voz, mi refugio..."</div>
+            
+            <div class="bloque-ilustrado">
+                <img src="descarga (4).jfif" alt="Chibi Beso en la Mejilla" class="img-decorativa img-izquierda img-grande">
+                <div class="texto-romantico">
+                    Sonrío solo al escuchar tu sonrisa. No hay nada más cálido para mis oídos que tu voz, mi amor; amo cómo pronuncias cada palabra, cada acento, cada pausa. Prometo hacerte feliz, Evelyn. Quiero ser tu lugar seguro en quien puedas confiar y apoyarte; quiero ser el tipo de esposo que siempre está para su mujer en las buenas y en las malas, sin importar lo que venga y lo que nos depare el futuro. Yo prometo siempre estar a tu lado, así como tú lo estuviste en mis peores momentos, donde pensaba que no quedaba salida ni había solución. Ahí estabas tú, bebé, mi ángel salvador, la que sin importar lo que pasara y dijera, seguía ahí. Por más inseguro que fuera, aún decidiste quedarte. De aquí a mil años, siempre serás la única persona que amaré en este mundo.
+                </div>
+            </div>
+
+            <div class="divisor-decorativo"><i class="fa-solid fa-heart"></i></div>
+
+            <div class="seccion-titulo">"Superando cada tormenta juntos"</div>
+            
+            <div class="bloque-ilustrado">
+                <img src="descarga (5).jfif" alt="Chibi Compartiendo Bocadito" class="img-decorativa img-derecha">
+                <div class="texto-romantico">
+                    7 meses, bebé, aún no lo creo. Hemos pasado por tantas cosas, tanto lindos como malos momentos juntos. Momentos donde nos sentíamos más cerca aún con todos los kilómetros que nos separan, y también esos momentos en donde pensaba que todo acabaría por malentendidos, inseguridades o discusiones. ¿Pero qué crees, bebé? Al final siempre encontramos una solución y terminamos más unidos, y eso es lo que amo de nuestra relación, mi amor. Ya llevamos mucho mejor las discusiones, nos escuchamos el uno al otro y resolvemos las cosas como pareja. Sinceramente siento que puedo vivir toda mi vida junto a ti sin arrepentirme en ningún momento de mi decisión, ya que fue gracias a esa personita especial que soy quien soy, y gracias a ella tengo la inspiración y una meta clara que alcanzar: ir y poder vivir con ella y para ella.
+                </div>
+            </div>
+
+            <div class="bloque-ilustrado">
+                <img src="descarga (3).jfif" alt="Chibi Acuarela" class="img-decorativa img-izquierda">
+                <div class="texto-romantico">
+                    Siempre serás mi mejor amiga. Sigues siendo la misma chica cariñosa, carismática y divertida de la cual me enamoré. La gente dice que después de un tiempo las personas cambian, pero en estos 7 meses entendí que no es verdad; tú nunca perdiste esa chispa que me acelera el corazón. Una palabra, un mensaje, un audio, una foto... esa chispa me cautiva y me hace querer siempre estar contigo, protegerte y hacerte feliz. En ti veo a la mujer que siempre quise, la mujer por la que daría todo para verla sonreír, por la que sacrificaría muchas cosas para estar junto a ella. Espérame, cariño, prometo ser el hombre que se haga responsable de su familia, prometo ayudarte en lo que necesites y te prometo siempre estar a tu lado. Nunca te abandonare, por más malas que estén las cosas buscaré una solución y lo resolveremos juntos porque somos un equipo, bebé; siempre lo hemos sido.
+                </div>
+            </div>
+
+            <div class="divisor-decorativo"><i class="fa-solid fa-moon"></i></div>
+
+            <div class="seccion-titulo">"Desde el cansancio, pero con el corazón despierto"</div>
+            <div class="texto-romantico">
+                Escribo desde el cansancio de alguien que desea poder recortar la distancia, el cansancio de no poder decirte esto directamente a la cara, ver tu reacción, el cómo sonreirías, tus gestos y tus microexpresiones de tu día a día; el cansancio de no poder salir en este mismo momento a besarte y a abrazarte. Podré estar escribiendo desde el cansancio pero, todo esto te lo digo desde mi corazón, cielo. Mi cuerpo podrá estar cansado, pero mi corazón nunca lo estará; él siempre está esperando, él siempre estará deseando... él siempre, bebé, siempre está esperando hasta el día que lo puedas sentir latir por ti.
+            </div>
+
+            <div class="texto-romantico">
+                Gracias por estar conmigo, gracias por darme la oportunidad de acompañarte. Prometo nunca fallarte, haré todo lo posible para ser mejor cada día, para que tengas a ese alguien que te mereces. Gracias por ser mi novia y deseo convertirte en mi futura esposa, eres lo que siempre deseé y lo que siempre soñé. Amo a Baku que siempre estuvo para mí en mis malos momentos, amo a Haru que me enseñó lo que es sentirse enamorado, y amo a mi preciosa Evelyn, que me enseñó que por más podrido que esté este mundo, siempre habrá un rayo de luz en el cual puedes confiar.
+            </div>
+
+            <div class="firma-final">
+                Te amo mi cielo, feliz aniversario. Espero este sea uno de muchos. Mua. 💗<br>
+                <span style="font-size: 19px; display: inline-block; margin-top: 10px; color: var(--texto-base); opacity: 0.8;">De tu novio, te amo.</span>
+            </div>
+        </div>
+    </div>
+
+    <iframe id="bg-music" width="0" height="0" src="" frameborder="0" allow="autoplay"></iframe>
+    <div id="music-control" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></div>
+
+    <script>
+        const CLAVE_CORRECTA = "1610";
+        let musicPlaying = true;
+
+        function checkAccess() {
+            const input = document.getElementById('passInput').value;
+            if(input === CLAVE_CORRECTA) {
+                const screen = document.getElementById('lock-screen');
+                screen.style.opacity = '0';
+                screen.style.transform = 'translateY(-100vh)';
+                
+                setTimeout(() => {
+                    screen.style.display = 'none';
+                    const main = document.getElementById('main-content');
+                    main.style.opacity = '1';
+                    main.style.visibility = 'visible';
+                    main.style.transform = 'scale(1)';
+                    
+                    const iframe = document.getElementById('bg-music');
+                    iframe.src = "https://www.youtube.com/embed/5K18w6b9fkw?autoplay=1&loop=1&playlist=5K18w6b9fkw";
+                    
+                    setInterval(crearPetaloNatural, 250);
+                }, 1000);
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+                document.getElementById('passInput').value = '';
+            }
+        }
+
+        function crearPetaloNatural() {
+            const p = document.createElement('div');
+            p.classList.add('petal');
+            
+            const ancho = Math.random() * 10 + 7;
+            const alto = ancho * 1.25;
+            p.style.width = ancho + 'px';
+            p.style.height = alto + 'px';
+            
+            const posicionInicialX = Math.random() * 60 + 40; 
+            p.style.left = posicionInicialX + 'vw';
+            
+            const desviacionViento = -(Math.random() * 25 + 15) + 'vw';
+            const rotacionGiro = (Math.random() * 360 + 180) + 'deg';
+            const duracionCaida = (Math.random() * 4 + 7) + 's';
+            const duracionBalanceo = (Math.random() * 1.5 + 1.5) + 's';
+            
+            p.style.setProperty('--start-x', posicionInicialX + 'vw');
+            p.style.setProperty('--drift-x', desviacionViento);
+            p.style.setProperty('--rotacion-max', rotacionGiro);
+            
+            p.style.animationName = 'caerNatural, balanceoSuave';
+            p.style.animationDuration = `${duracionCaida}, ${duracionBalanceo}`;
+            
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 11000);
+        }
+
+        function toggleMusic() {
+            const iframe = document.getElementById('bg-music');
+            const icon = document.querySelector('#music-control i');
+            if(musicPlaying) {
+                iframe.src = "";
+                icon.className = "fa-solid fa-volume-xmark";
+                musicPlaying = false;
+            } else {
+                iframe.src = "https://www.youtube.com/embed/5K18w6b9fkw?autoplay=1&loop=1&playlist=5K18w6b9fkw";
+                icon.className = "fa-solid fa-music";
+                musicPlaying = true;
+            }
+        }
+    </script>
+</body>
+</html>
