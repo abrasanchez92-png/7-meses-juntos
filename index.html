@@ -362,7 +362,7 @@
             <div class="bloque-ilustrado">
                 <img src="descarga (4).jfif" alt="Chibi Beso en la Mejilla" class="img-decorativa img-izquierda img-grande">
                 <div class="texto-romantico">
-                    Sonrío solo al escuchar tu sonrisa. No hay nada más cálido para mis oídos que tu voz, mi amor; amo cómo pronuncias cada palabra, cada acento, cada pausa. Prometo hacerte feliz, Evelyn. Quiero ser tu lugar seguro en quien puedas confiar y apoyarte; quiero ser el tipo de esposo que siempre está para su mujer en las buenas y en las malas, sin importar lo que venga y lo que nos depare el futuro. Yo prometo siempre estar a tu lado, así como tú lo estuviste en mis peores momentos, donde pensaba que no quedaba salida ni había solución. Ahí estabas tú, bebé, mi ángel salvador, la que sin importar lo que pasara y dijera, seguía ahí. Por más inseguro que fuera, aún decidiste quedarte. De aquí a mil años, siempre serás la única persona que amaré en este mundo.
+                    Sonrío solo al escuchar tu sonrisa. No hay nada más cálido para mis oídos que tu voz, mi amor; amo cómo pronuncias cada palabra, cada acento, cada pausa. Prometo hacerte feliz, Evelyn. Quiero ser tu lugar seguro en quien puedas confiar y apoyarte; quiero ser el tipo de esposo que siempre está para su mujer en las buenas y en las malas, sin importar lo que venga y lo que nos depare el futuro. Yo prometo siempre estar a tu lado, así como tú lo estuviste en mis peores momentos, donde pensaba que no quedaba salida ni había solución. Ahí estabas tú, bebé, mi ángel salvador, la que sin importar lo que pasara y dijera, seguía ahí. Por más insecure que fuera, aún decidiste quedarte. De aquí a mil años, siempre serás la única persona que amaré en este mundo.
                 </div>
             </div>
 
@@ -402,12 +402,14 @@
         </div>
     </div>
 
-    <iframe id="bg-music" width="0" height="0" src="" frameborder="0" allow="autoplay"></iframe>
+    <audio id="bg-music" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
+    </audio>
     <div id="music-control" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></div>
 
     <script>
         const CLAVE_CORRECTA = "1610";
-        let musicPlaying = true;
+        let musicPlaying = false;
 
         function checkAccess() {
             const input = document.getElementById('passInput').value;
@@ -423,8 +425,13 @@
                     main.style.visibility = 'visible';
                     main.style.transform = 'scale(1)';
                     
-                    const iframe = document.getElementById('bg-music');
-                    iframe.src = "https://www.youtube.com/embed/5K18w6b9fkw?autoplay=1&loop=1&playlist=5K18w6b9fkw";
+                    // REPRODUCCIÓN NATIVA TRAS EL CLICK EN "INGRESAR"
+                    const audio = document.getElementById('bg-music');
+                    audio.play().then(() => {
+                        musicPlaying = true;
+                    }).catch(err => {
+                        console.log("El navegador bloqueó el autoplay, esperando interacción.");
+                    });
                     
                     setInterval(crearPetaloNatural, 250);
                 }, 1000);
@@ -453,28 +460,3 @@
             
             p.style.setProperty('--start-x', posicionInicialX + 'vw');
             p.style.setProperty('--drift-x', desviacionViento);
-            p.style.setProperty('--rotacion-max', rotacionGiro);
-            
-            p.style.animationName = 'caerNatural, balanceoSuave';
-            p.style.animationDuration = `${duracionCaida}, ${duracionBalanceo}`;
-            
-            document.body.appendChild(p);
-            setTimeout(() => p.remove(), 11000);
-        }
-
-        function toggleMusic() {
-            const iframe = document.getElementById('bg-music');
-            const icon = document.querySelector('#music-control i');
-            if(musicPlaying) {
-                iframe.src = "";
-                icon.className = "fa-solid fa-volume-xmark";
-                musicPlaying = false;
-            } else {
-                iframe.src = "https://www.youtube.com/embed/5K18w6b9fkw?autoplay=1&loop=1&playlist=5K18w6b9fkw";
-                icon.className = "fa-solid fa-music";
-                musicPlaying = true;
-            }
-        }
-    </script>
-</body>
-</html>
