@@ -257,7 +257,7 @@
             clear: both;
         }
 
-        /* --- PÉTALOS NATURALES --- */
+        /* --- NUEVOS PÉTALOS NATURALES CON HOJEO DE LADO A LADO --- */
         .petal {
             position: fixed;
             pointer-events: none;
@@ -268,22 +268,35 @@
             box-shadow: 1px 1px 3px rgba(224, 146, 146, 0.15);
             opacity: 0.9;
             transform-origin: center;
-            animation: caerNatural linear forwards, balanceoSuave ease-in-out infinite alternate;
+            /* La animación de caer y la de balanceo ahora actúan juntas de forma más realista */
+            animation: caerVertical linear forwards, balanceoHoja ease-in-out infinite alternate;
         }
 
-        @keyframes caerNatural {
-            0% { top: -30px; opacity: 0; }
-            10% { opacity: 0.9; }
+        /* Ahora caen hacia abajo de forma controlada usando variables dinámicas */
+        @keyframes caerVertical {
+            0% { 
+                top: -30px; 
+                opacity: 0; 
+            }
+            10% { 
+                opacity: 0.85; 
+            }
             100% {
                 top: 105vh;
+                /* Añade una caída natural sin diagonales exageradas */
                 left: calc(var(--start-x) + var(--drift-x));
-                opacity: 0.1;
+                opacity: 0.05;
             }
         }
 
-        @keyframes balanceoSuave {
-            0% { transform: rotate(0deg) translateX(-10px); }
-            100% { transform: rotate(var(--rotacion-max)) translateX(10px); }
+        /* Simula exactamente el efecto físico de una hoja o pétalo flotando de lado a lado */
+        @keyframes balanceoHoja {
+            0% { 
+                transform: rotate(0deg) translateX(var(--sway-left)); 
+            }
+            100% { 
+                transform: rotate(var(--rotacion-max)) translateX(var(--sway-right)); 
+            }
         }
 
         #music-control {
@@ -345,7 +358,7 @@
             <div class="bloque-ilustrado">
                 <img src="Painter of the night ~ Seungho x Nakium.jfif" alt="Chibi Pensando en Gato" class="img-decorativa img-derecha">
                 <div class="texto-romantico">
-                    Mi amor, hoy se cumplen 7 meses desde que todo comenzó y aún me parece que todo haya sido hace tan poco. Contigo a mi lado el tiempo se acelera, como si no quisiera que disfrutemos el estar juntos, pero Dios nos bendice con otro mes, cada día más cerca de nuestra meta como pareja. Quiero decirte que no sabes lo tanto que has cambiado mi vida desde que llegaste; tu forma de ver al mundo tan única, la amo, y desde que te conocí no he dejado de cambiar.
+                    Mi amor, hoy se cumplen 7 meses desde que todo comenzó y aún me parece que todo haya sido hace tan poco. Contigo a mi lado el tiempo se acelera, como si no quisiera que disfrutemos el estar juntos, pero Dios nos bendice con otro mes, cada día más cerca de nuestra meta como pareja. Quiero decirte que no sabes lo tanto que has cambiado mi vida desde que llegaste; tu forma de ver al mundo tan única, la amo, y desde que te conocí no he dejado de cambio.
                 </div>
             </div>
 
@@ -403,7 +416,7 @@
     </div>
 
     <audio id="bg-music" loop>
-        <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
     </audio>
     <div id="music-control" onclick="toggleMusic()"><i class="fa-solid fa-music"></i></div>
 
@@ -425,15 +438,15 @@
                     main.style.visibility = 'visible';
                     main.style.transform = 'scale(1)';
                     
-                    // REPRODUCCIÓN NATIVA TRAS EL CLICK EN "INGRESAR"
+                    // Reproducción del archivo local inmediato
                     const audio = document.getElementById('bg-music');
                     audio.play().then(() => {
                         musicPlaying = true;
                     }).catch(err => {
-                        console.log("El navegador bloqueó el autoplay, esperando interacción.");
+                        console.log("Interacción detectada pero se requiere confirmación física de volumen.");
                     });
                     
-                    setInterval(crearPetaloNatural, 250);
+                    setInterval(crearPetaloNatural, 300); // Un pelín más espaciados para no saturar la pantalla
                 }, 1000);
             } else {
                 document.getElementById('error-msg').style.display = 'block';
@@ -445,18 +458,60 @@
             const p = document.createElement('div');
             p.classList.add('petal');
             
-            const ancho = Math.random() * 10 + 7;
-            const alto = ancho * 1.25;
+            // Tamaños variados
+            const ancho = Math.random() * 12 + 6;
+            const alto = ancho * 1.3;
             p.style.width = ancho + 'px';
             p.style.height = alto + 'px';
             
-            const posicionInicialX = Math.random() * 60 + 40; 
+            // Distribución a todo lo ancho de la pantalla
+            const posicionInicialX = Math.random() * 100; 
             p.style.left = posicionInicialX + 'vw';
             
-            const desviacionViento = -(Math.random() * 25 + 15) + 'vw';
-            const rotacionGiro = (Math.random() * 360 + 180) + 'deg';
-            const duracionCaida = (Math.random() * 4 + 7) + 's';
-            const duracionBalanceo = (Math.random() * 1.5 + 1.5) + 's';
+            // --- NUEVA LÓGICA DE VELOCIDAD Y MOVIMIENTO ---
+            // Duración de caída: Algunos caen en 5 segundos (rápido) y otros hasta en 12 segundos (súper lentos)
+            const duracionCaida = (Math.random() * 7 + 5) + 's';
             
+            // Velocidad de balanceo de lado a lado (entre 2 y 4 segundos por ciclo)
+            const duracionBalanceo = (Math.random() * 2 + 2) + 's';
+            
+            // Amplitud del vaivén (cuánto se tambalean hacia los lados en píxeles/rem)
+            const rangoSwayIzq = -(Math.random() * 25 + 10) + 'px';
+            const rangoSwayDer = (Math.random() * 25 + 10) + 'px';
+            
+            // Desviación leve de caída general (para que no caigan en una diagonal rígida)
+            const desviacionViento = (Math.random() * 10 - 5) + 'vw';
+            const rotacionGiro = (Math.random() * 260 + 100) + 'deg';
+            
+            // Asignación de variables al estilo del pétalo
             p.style.setProperty('--start-x', posicionInicialX + 'vw');
             p.style.setProperty('--drift-x', desviacionViento);
+            p.style.setProperty('--rotacion-max', rotacionGiro);
+            p.style.setProperty('--sway-left', rangoSwayIzq);
+            p.style.setProperty('--sway-right', rangoSwayDer);
+            
+            p.style.animationName = 'caerVertical, balanceoHoja';
+            p.style.animationDuration = `${duracionCaida}, ${duracionBalanceo}`;
+            
+            document.body.appendChild(p);
+            
+            // Se eliminan de la pantalla según su velocidad de caída individual
+            setTimeout(() => p.remove(), parseFloat(duracionCaida) * 1000);
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const icon = document.querySelector('#music-control i');
+            if(musicPlaying) {
+                audio.pause();
+                icon.className = "fa-solid fa-volume-xmark";
+                musicPlaying = false;
+            } else {
+                audio.play();
+                icon.className = "fa-solid fa-music";
+                musicPlaying = true;
+            }
+        }
+    </script>
+</body>
+</html>
