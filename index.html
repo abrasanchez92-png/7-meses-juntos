@@ -150,7 +150,7 @@
             position: relative;
         }
 
-        /* --- ESTILOS DE CORTE EN CÍRCULO --- */
+        /* --- ESTILOS DE IMÁGENES COMPATIBLES CON GITHUB --- */
         .bloque-ilustrado {
             overflow: hidden;
             margin-bottom: 20px;
@@ -184,7 +184,6 @@
             margin: 10px 25px 15px 0;
         }
 
-        /* Ajuste especial para resaltar el beso */
         .img-grande {
             width: 200px;
             height: 200px;
@@ -257,7 +256,7 @@
             clear: both;
         }
 
-        /* --- NUEVOS PÉTALOS NATURALES CON HOJEO DE LADO A LADO --- */
+        /* --- EFECTO CAÍDA NATURAL DE PÉTALOS DE ROSA --- */
         .petal {
             position: fixed;
             pointer-events: none;
@@ -268,35 +267,22 @@
             box-shadow: 1px 1px 3px rgba(224, 146, 146, 0.15);
             opacity: 0.9;
             transform-origin: center;
-            /* La animación de caer y la de balanceo ahora actúan juntas de forma más realista */
             animation: caerVertical linear forwards, balanceoHoja ease-in-out infinite alternate;
         }
 
-        /* Ahora caen hacia abajo de forma controlada usando variables dinámicas */
         @keyframes caerVertical {
-            0% { 
-                top: -30px; 
-                opacity: 0; 
-            }
-            10% { 
-                opacity: 0.85; 
-            }
+            0% { top: -30px; opacity: 0; }
+            10% { opacity: 0.85; }
             100% {
                 top: 105vh;
-                /* Añade una caída natural sin diagonales exageradas */
                 left: calc(var(--start-x) + var(--drift-x));
                 opacity: 0.05;
             }
         }
 
-        /* Simula exactamente el efecto físico de una hoja o pétalo flotando de lado a lado */
         @keyframes balanceoHoja {
-            0% { 
-                transform: rotate(0deg) translateX(var(--sway-left)); 
-            }
-            100% { 
-                transform: rotate(var(--rotacion-max)) translateX(var(--sway-right)); 
-            }
+            0% { transform: rotate(0deg) translateX(var(--sway-left)); }
+            100% { transform: rotate(var(--rotacion-max)) translateX(var(--sway-right)); }
         }
 
         #music-control {
@@ -320,11 +306,9 @@
         }
         #music-control:hover { opacity: 1; }
 
-        /* --- RESPONSIVE PARA MÓVILES --- */
+        /* --- RESPONSIVE PARA CELULARES --- */
         @media (max-width: 600px) {
-            .carta-container {
-                padding: 35px 20px;
-            }
+            .carta-container { padding: 35px 20px; }
             .img-derecha, .img-izquierda {
                 float: none;
                 display: block;
@@ -346,7 +330,7 @@
             <h2>Acceso Privado</h2>
             <p>Introduce nuestra fecha especial para continuar</p>
             <input type="password" id="passInput" placeholder="••••" maxlength="4" autocomplete="off">
-            <button onclick="checkAccess()">Ingresar</button>
+            <button onclick="checkAccess()">Ingresar con Música 🎵</button>
             <p id="error-msg">Fecha incorrecta... Inténtalo de nuevo. 💕</p>
         </div>
     </div>
@@ -356,7 +340,7 @@
             <div class="fecha-cabecera">Nuestros 7 Meses ✨</div>
             
             <div class="bloque-ilustrado">
-                <img src="Painter of the night ~ Seungho x Nakium.jfif" alt="Chibi Pensando en Gato" class="img-decorativa img-derecha">
+                <img src="Painter of the night ~ Seungho x Nakium.jfif" alt="Foto 1" class="img-decorativa img-derecha">
                 <div class="texto-romantico">
                     Mi amor, hoy se cumplen 7 meses desde que todo comenzó y aún me parece que todo haya sido hace tan poco. Contigo a mi lado el tiempo se acelera, como si no quisiera que disfrutemos el estar juntos, pero Dios nos bendice con otro mes, cada día más cerca de nuestra meta como pareja. Quiero decirte que no sabes lo tanto que has cambiado mi vida desde que llegaste; tu forma de ver al mundo tan única, la amo, y desde que te conocí no he dejado de cambio.
                 </div>
@@ -373,7 +357,7 @@
             <div class="seccion-titulo">"Tu voz, mi refugio..."</div>
             
             <div class="bloque-ilustrado">
-                <img src="descarga (4).jfif" alt="Chibi Beso en la Mejilla" class="img-decorativa img-izquierda img-grande">
+                <img src="descarga (4).jfif" alt="Foto 2" class="img-decorativa img-izquierda img-grande">
                 <div class="texto-romantico">
                     Sonrío solo al escuchar tu sonrisa. No hay nada más cálido para mis oídos que tu voz, mi amor; amo cómo pronuncias cada palabra, cada acento, cada pausa. Prometo hacerte feliz, Evelyn. Quiero ser tu lugar seguro en quien puedas confiar y apoyarte; quiero ser el tipo de esposo que siempre está para su mujer en las buenas y en las malas, sin importar lo que venga y lo que nos depare el futuro. Yo prometo siempre estar a tu lado, así como tú lo estuviste en mis peores momentos, donde pensaba que no quedaba salida ni había solución. Ahí estabas tú, bebé, mi ángel salvador, la que sin importar lo que pasara y dijera, seguía ahí. Por más insecure que fuera, aún decidiste quedarte. De aquí a mil años, siempre serás la única persona que amaré en este mundo.
                 </div>
@@ -384,14 +368,14 @@
             <div class="seccion-titulo">"Superando cada tormenta juntos"</div>
             
             <div class="bloque-ilustrado">
-                <img src="descarga (5).jfif" alt="Chibi Compartiendo Bocadito" class="img-decorativa img-derecha">
+                <img src="descarga (5).jfif" alt="Foto 3" class="img-decorativa img-derecha">
                 <div class="texto-romantico">
                     7 meses, bebé, aún no lo creo. Hemos pasado por tantas cosas, tanto lindos como malos momentos juntos. Momentos donde nos sentíamos más cerca aún con todos los kilómetros que nos separan, y también esos momentos en donde pensaba que todo acabaría por malentendidos, inseguridades o discusiones. ¿Pero qué crees, bebé? Al final siempre encontramos una solución y terminamos más unidos, y eso es lo que amo de nuestra relación, mi amor. Ya llevamos mucho mejor las discusiones, nos escuchamos el uno al otro y resolvemos las cosas como pareja. Sinceramente siento que puedo vivir toda mi vida junto a ti sin arrepentirme en ningún momento de mi decisión, ya que fue gracias a esa personita especial que soy quien soy, y gracias a ella tengo la inspiración y una meta clara que alcanzar: ir y poder vivir con ella y para ella.
                 </div>
             </div>
 
             <div class="bloque-ilustrado">
-                <img src="descarga (3).jfif" alt="Chibi Acuarela" class="img-decorativa img-izquierda">
+                <img src="descarga (3).jfif" alt="Foto 4" class="img-decorativa img-izquierda">
                 <div class="texto-romantico">
                     Siempre serás mi mejor amiga. Sigues siendo la misma chica cariñosa, carismática y divertida de la cual me enamoré. La gente dice que después de un tiempo las personas cambian, pero en estos 7 meses entendí que no es verdad; tú nunca perdiste esa chispa que me acelera el corazón. Una palabra, un mensaje, un audio, una foto... esa chispa me cautiva y me hace querer siempre estar contigo, protegerte y hacerte feliz. En ti veo a la mujer que siempre quise, la mujer por la que daría todo para verla sonreír, por la que sacrificaría muchas cosas para estar junto a ella. Espérame, cariño, prometo ser el hombre que se haga responsable de su familia, prometo ayudarte en lo que necesites y te prometo siempre estar a tu lado. Nunca te abandonare, por más malas que estén las cosas buscaré una solución y lo resolveremos juntos porque somos un equipo, bebé; siempre lo hemos sido.
                 </div>
@@ -427,6 +411,14 @@
         function checkAccess() {
             const input = document.getElementById('passInput').value;
             if(input === CLAVE_CORRECTA) {
+                // Forzar el inicio del audio gracias a la acción directa del clic
+                const audio = document.getElementById('bg-music');
+                audio.play().then(() => {
+                    musicPlaying = true;
+                }).catch(err => {
+                    console.log("Audio retenido por el navegador, se reintentará en breve.");
+                });
+
                 const screen = document.getElementById('lock-screen');
                 screen.style.opacity = '0';
                 screen.style.transform = 'translateY(-100vh)';
@@ -438,15 +430,12 @@
                     main.style.visibility = 'visible';
                     main.style.transform = 'scale(1)';
                     
-                    // Reproducción del archivo local inmediato
-                    const audio = document.getElementById('bg-music');
-                    audio.play().then(() => {
-                        musicPlaying = true;
-                    }).catch(err => {
-                        console.log("Interacción detectada pero se requiere confirmación física de volumen.");
-                    });
+                    // Si falló antes, reintentamos reproducir aquí
+                    if(!musicPlaying) {
+                        audio.play().then(() => { musicPlaying = true; }).catch(e => console.log(e));
+                    }
                     
-                    setInterval(crearPetaloNatural, 300); // Un pelín más espaciados para no saturar la pantalla
+                    setInterval(crearPetaloNatural, 350); 
                 }, 1000);
             } else {
                 document.getElementById('error-msg').style.display = 'block';
@@ -458,32 +447,24 @@
             const p = document.createElement('div');
             p.classList.add('petal');
             
-            // Tamaños variados
             const ancho = Math.random() * 12 + 6;
             const alto = ancho * 1.3;
             p.style.width = ancho + 'px';
             p.style.height = alto + 'px';
             
-            // Distribución a todo lo ancho de la pantalla
             const posicionInicialX = Math.random() * 100; 
             p.style.left = posicionInicialX + 'vw';
             
-            // --- NUEVA LÓGICA DE VELOCIDAD Y MOVIMIENTO ---
-            // Duración de caída: Algunos caen en 5 segundos (rápido) y otros hasta en 12 segundos (súper lentos)
+            // Tiempos de caída dinámicos (velocidades lentas y semirápidas variadas)
             const duracionCaida = (Math.random() * 7 + 5) + 's';
-            
-            // Velocidad de balanceo de lado a lado (entre 2 y 4 segundos por ciclo)
             const duracionBalanceo = (Math.random() * 2 + 2) + 's';
             
-            // Amplitud del vaivén (cuánto se tambalean hacia los lados en píxeles/rem)
+            // Efecto vaivén de lado a lado
             const rangoSwayIzq = -(Math.random() * 25 + 10) + 'px';
             const rangoSwayDer = (Math.random() * 25 + 10) + 'px';
-            
-            // Desviación leve de caída general (para que no caigan en una diagonal rígida)
             const desviacionViento = (Math.random() * 10 - 5) + 'vw';
             const rotacionGiro = (Math.random() * 260 + 100) + 'deg';
             
-            // Asignación de variables al estilo del pétalo
             p.style.setProperty('--start-x', posicionInicialX + 'vw');
             p.style.setProperty('--drift-x', desviacionViento);
             p.style.setProperty('--rotacion-max', rotacionGiro);
@@ -494,8 +475,6 @@
             p.style.animationDuration = `${duracionCaida}, ${duracionBalanceo}`;
             
             document.body.appendChild(p);
-            
-            // Se eliminan de la pantalla según su velocidad de caída individual
             setTimeout(() => p.remove(), parseFloat(duracionCaida) * 1000);
         }
 
